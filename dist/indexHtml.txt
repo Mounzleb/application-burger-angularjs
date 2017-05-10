@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Burger</title>
+    <script src="bundle.js"></script>
+    <style>
+        .container {
+            margin-top: 3em;
+        }
+    </style>
+</head>
+<!--le module qui a pour nom "app" créé dans index.js estappelé ici pour dire que tout l'interieur du body sera gérer par notre application app' -->
+
+<body ng-app="app">
+
+    <div class="container">
+
+        <!--j'ai fait le liens avec mon controller définit dans index.js-->
+        <!--on dit que des qu'il rencontre un controller USerController, il l'instancie et le nomme $ctrl.-->
+        <h1 ng-controller="UserController as $ctrl">
+            Bonjour {{$ctrl.name}}
+        </h1>
+
+        <div class="test" ng-controller="ApplicationInfoController as $ctrl">
+            <strong>{{ $ctrl.name }}</strong>
+            <!--ici je fait ng-if = $cntrl.show car on l'a initialisé à false dans le controller application-info-->
+            <span ng-if=$ctrl.showVersion>{{ $ctrl.version }}</span>
+            <!--ici lorsque je cloque j'appel la methode showVersion(), dans la quel j'ai passé show à true,' avec la directive ng-click-->
+
+            <button class="btn" ng-click="$ctrl.toggleVersion()">
+            SHOW VERSION
+        </button>
+        </div>
+
+
+
+    </div>
+
+
+</body>
+
+</html>
+
+
+
+//---------------------------------Avoir ce que ça fait ---------------------
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Burger</title>
+    <script src="bundle.js"></script>
+    <style>
+        .container {
+            margin-top: 3em;
+        }
+    </style>
+</head>
+<body ng-app="app">
+
+    <div class="container" ng-controller="TabsController as $ctrl">
+
+        <ul class="nav nav-tabs">
+        <!-- ici 'active' est une façons d'afficher dans css, Ca correspond au petit carre entourant mon mot en haut dans la page-->
+            <li ng-class="active">
+                <a ng-click="$ctrl.changeTab('user')" href>User</a>
+            </li>
+            <li>
+                <a ng-click="$ctrl.changeTab('application')" href>Application</a>
+            </li>
+        </ul>
+        <div ng-if="$ctrl.tab === 'user'">
+            <h1>USER</h1>
+        </div>
+        <div ng-if="$ctrl.tab === 'application'">
+            <h1>APPLICATION</h1>
+        </div>
+
+
+        <!--<h1 ng-controller="UserController as $ctrl">
+            Bonjour {{ $ctrl.getName() }}
+        </h1>
+
+        <div class="test" ng-controller="ApplicationInfoController as $ctrl">
+            <strong>{{ $ctrl.name }}</strong>
+            <span ng-if="$ctrl.showVersion">{{ $ctrl.version }}</span>
+            <button 
+                class="btn" 
+                ng-click="$ctrl.toggleVersion()">
+                SHOW VERSION
+            </button>
+        </div>-->
+
+    </div>
+</body>
+</html>
+
+
