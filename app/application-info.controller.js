@@ -1,6 +1,10 @@
 export class ApplicationInfoController {
   constructor () {
-    this.name = 'Burger'
+ this.info = {
+      name: 'Burger',
+      version: '1.0.0',
+      date: new Date(2012, 10, 10)
+    }
     this.version = '1.0.0'
     this.showVersion = false
 

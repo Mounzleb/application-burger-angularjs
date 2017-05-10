@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -13,21 +12,23 @@
         }
     </style>
 </head>
-
 <body ng-app="app">
 
     <div class="container" ng-controller="TabsController as $ctrl">
-        <!-- le nav nav-tabs me permet d'avoir mes onglets en haut, c'est du bootstrap-->
+
+        {{ 'Bonjour' | toto }}
+        {{'Bonjour'| mirror}}
+        
+
+
+
         <ul class="nav nav-tabs">
-            <!--ng-repeat va me permettre d'afficher ici les ligne de mon tableau une  à une grace à track by $index-->
-            <li ng-repeat="tab in $ctrl.tabs track by $index" ng-class="{'active': $ctrl.tab === $index}">
-                <!--la balise<a> veux dire que c'est un liens-->
+            <li ng-repeat="tab in $ctrl.tabs track by $index"
+                ng-class="{'active': $ctrl.tab === $index}">
                 <a ng-click="$ctrl.changeTab($index)" href>{{ tab.title }}</a>
             </li>
-            <!--on créer l"affichage des deux petites fléches en hatu à droites de l'ecrans-->
-            <!-- on remplace les tab.title pour qu'on gére notre tableau en fonction de son indice de ligne et non pas de son titre-->
             <li class="pull-right">
-              <div class="btn-group">
+                <div class="btn-group">
                     <button ng-click="$ctrl.navigateTab(-1)"
                         class="btn btn-default btn-sm">
                         <span class="glyphicon glyphicon-chevron-left"></span>                    
@@ -37,27 +38,13 @@
                         <span class="glyphicon glyphicon-chevron-right"></span>
                     </button>
                 </div>
+            </li>
         </ul>
 
-        <div ng-repeat="tab in $ctrl.tabs track by $index" ng-if="$ctrl.tab === $index">
-            <h1>{{ tab.content }}</h1>
-        </div>
-
-        <!--<h1 ng-controller="UserController as $ctrl">
-            Bonjour {{ $ctrl.getName() }}
-        </h1>
-
-        <div class="test" ng-controller="ApplicationInfoController as $ctrl">
-            <strong>{{ $ctrl.name }}</strong>
-            <span ng-if="$ctrl.showVersion">{{ $ctrl.version }}</span>
-            <button 
-                class="btn" 
-                ng-click="$ctrl.toggleVersion()">
-                SHOW VERSION
-            </button>
-        </div>-->
-
+        <ng-include 
+            ng-repeat="tab in $ctrl.tabs track by $index"
+            ng-if="$ctrl.tab === $index"
+            src="$ctrl.getTemplate(tab)"></ng-include>
     </div>
 </body>
-
 </html>
