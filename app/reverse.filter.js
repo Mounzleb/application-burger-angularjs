@@ -1,5 +1,5 @@
-export function MirrorFilter () {
-  return function (input) {
+export function ReverseFilter () {
+  return function (input, sep = '') {
      if (typeof input !== 'string') return
 
     return input

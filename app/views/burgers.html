@@ -1,0 +1,93 @@
+<div ng-controller="BurgersController as $ctrl">
+
+    <!--ici je crée un formulaire que je lui donne un nom et qui est gérer par angular-->
+    <form name="burgerForm" novalidate ng-submit="$ctrl.save()">
+        <!--ng-model met à jour le model à traver la valeur et vis versa à traver notre balise input-->
+        <input type="text" name="name" ng-model="$ctrl.newburger.name" ng-minlength="4" class="form-control">
+        <!--le formulaire va nous servire de proxy, donc il va dire qu'il accepte le changement du model uniquement si 
+il respecte les critére minimal donné par ng-minilenght ici-->
+    </form>
+
+    <!--ici dans la class nous avons le css poiur l'affichage de notre tableau ( dans notre cas alternation de gris et blanc)-->
+    <table class="table table-bordered table-striped">
+        <thead>
+
+            <tr>
+
+                <!--je declare mon entête de tableau où nous avons deux colonnes-->
+                <th style="width: 50%">
+                    <a ng-click="$ctrl.sortBy('name')" href class="sort" ng-class="{ up: $ctrl.col === 'name' && !$ctrl.desc, down: $ctrl.col === 'name' && $ctrl.desc }">Name</a>
+                    <!--le bouton du search-->
+                    <input ng-model="query" type="text" class="form-control" placeholder="search ...">
+                </th>
+
+                <th>
+                    <!--on transforme le nom de la colonne Name en bouton Name-->
+                    <a ng-click="$ctrl.sortBy('toppings')" href class="sort down">Toppings</a>
+                    <!--la liste déroulante des toppings-->
+                    <select ng-model="toppings" class="form-control input-sm">
+                        <option value=""></option>
+                        <option ng-value="topping" 
+                            ng-repeat="topping in $ctrl.getToppings() track by $index">
+                            {{ topping }}
+                        </option>
+                    </select>
+                </th>
+
+            </tr>
+
+        </thead>
+
+        <tbody>
+            <!--ici on fait l'equivalent d'un forEach ou d'un for dans lequel on declare une variable pour boucler sur notre tableau-->
+            <!--ici notre variable local (equivalent du i dans la boucle for) est la variable burger, ou on l'utilise ensuite burger.name et burger.toppings-->
+            <tr ng-repeat="burger in $ctrl.burgers 
+            | filter:{name,toppings} 
+            | orderBy:$ctrl.getSortBase.bind($ctrl):$ctrl.desc
+            track by $index">
+                <!--| orderBy:$ctrl.getSortBase.bind($ctrl):$ctrl.desc  le orderBy en haut permet de faire du trie-->
+                <!-- donc ici on fait du trie par le nom vue qu'o appel la fonction getSortBase et on dit que le this vaus $ctrl qui fait reference au name dans notre burgers.controller-->
+                <!--ceci afin de resoudre le probléme du unifined-->
+                <!--on fait appel a la fin du ordreBy à :$ctrl.dexc pour justement gérer le trie par desc et donc permettre le switch des listes -->
+
+                <!--on dit qu'on veut prendre le tableau se trouvant dans burgers et je lui applique un filtre qui s'appel filter et donc il nous ressort un autre tableau-->
+                <td>{{ burger.name }}</td>
+                <td>
+                    <!--on affiche dans la colonne toppings le nombre d'ingredient qu'il y'a (les p^remieres acolade) 
+                    ainsi que le nom de chacun des ingredient séparé par une virdule (les deuxiemes accolades)-->
+                    {{ burger.toppings.length }} : {{ burger.toppings.join(',') }}
+
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+
+
+    <div class="col-sm-6">
+
+        <form name="formulaire" novalidate ng-submit="$ctrl.save(formulaire)">
+
+           <div class="form-group">
+            <label for="burgername">Burger name *</label>
+            <input type="text" name="name" class="form-control" required ng-model="$ctrl.newburger.name" placeholder="name">
+           </div>
+
+           <div class="form-group">
+            <label for="burgertoppings">Toppings</label>
+            <select name="toppings" multiple="true" class="form-control" ng-model="$ctrl.newburger.toppings">
+                <option value="{{ ingredient }}" ng-repeat="ingredient in $ctrl.getToppings()">{{ ingredient }}</option>
+            </select>
+            <div class="form-group">
+            </div>
+            <input type="email" name="creator" class="form-control" ng-model="$ctrl.newburger.creator" placeholder="email">
+            </div>
+            <button type="submit" class="btn btn-primary" 
+                ng-disabled="burgerForm.$invalid">save</button>
+
+        </form>
+
+        <pre>{{ $ctrl.newburger | json }}</pre>
+
+    </div>
+</div>

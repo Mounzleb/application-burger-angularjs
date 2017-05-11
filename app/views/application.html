@@ -1,15 +1,5 @@
 <div ng-controller="ApplicationInfoController as $ctrl">
-    {{ $ctrl.info.name | uppercase }}
-    <br>
-    {{ $ctrl.info.date | date:'fullDate' }}
-    <br>
-    <pre>{{ $ctrl.info | json }}
-        <div ng-controller="ApplicationInfoController as $ctrl">
 
-    <ul>
-        <li ng-repeat="user in $ctrl.users | orderBy:'name' track by $index">{{ user.name }}</li>
-    </ul>
+    {{ $ctrl.info.name | reverse }}
 
-</div>
-    </pre>
 </div>

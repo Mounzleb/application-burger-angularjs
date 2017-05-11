@@ -1,7 +1,8 @@
 export class TabsController {
   constructor () {
     this.tabs = [
-      { title: 'User', template: 'user' },
+ //     { title: 'User', template: 'user' },
+      { title: 'Burgers', template: 'burgers' },
       { title: 'Application', template: 'application' }
     ]
 

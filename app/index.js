@@ -1,31 +1,19 @@
-// ici je recupére angular
 import angular from 'angular'
-import css from 'bootstrap/dist/css/bootstrap.css'
+import 'bootstrap/dist/css/bootstrap.css'
 
-import { UserController } from './user.controller'
+import { BurgersController } from './burgers.controller'
 import { ApplicationInfoController } from './application-info.controller'
 import { TabsController } from './tabs.controller'
-import { TotoFilter } from './toto.filter'
-import { MirrorFilter} from './mirror.filter'
+import { ReverseFilter } from './reverse.filter'
 
-
-// Création du module qui a pour nom app et on lui di qu'il ne dépend d'aucun autre module
-//angular.module('app', []);
-
-//------En fonction de l'arité d'une methode (cad le nombre de paramétre de notre méthode), on executera des tache différentes
-//------voir différence entre angular.module('app', []); et angular.module('app');
-// Récup(getter) du module app, ceci afin de ne pas stocker 'angular.module('app', []);' dans une variable 
-//angular.module('app');
-
+// Création du module app (application)
 angular.module('app', [])
 
-    // je définis mon controller que j'appel UserController
-.controller('UserController', UserController)
+.controller('BurgersController', BurgersController)
 .controller('ApplicationInfoController', ApplicationInfoController)
 .controller('TabsController', TabsController)
 
-.filter('toto', TotoFilter)
-.filter('mirror', MirrorFilter)
+.filter('reverse', ReverseFilter)
 
 // .config(function () {
 //     console.log('CONFIG ANGULAR');

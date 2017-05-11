@@ -1,0 +1,32 @@
+<!--dans la partie qui suis nous avons la declaration de notre formuilaire avec les champs de saisie pour le burger name, les toppings et l'email ainsi que le bouton save-->
+<form name="burgerForm" novalidate ng-submit="$ctrl.save(burgerForm)">
+
+    <div class="form-group">
+        <label for="burgername">Burger name *</label>
+        <!--champ de saisi-->
+        <input type="text" id="burgername" name="name" required ng-minlength="5" ng-model="$ctrl.newburger.name" class="form-control">
+    </div>
+
+    <div class="form-group">
+        <label for="burgertoppings">Toppings</label>
+        <!--le select est pour faire ma barre de selection-->
+        <!--je met multiple en true pour popuvoir faire differente selection ( j'ai en plus une barre defilmante pour la selection)-->
+        <!-- class ="form-control" crée mon contoure pour la rubrique de selection-->
+        <select name="toppings" id="burgertoppings" multiple="true" class="form-control" ng-model="$ctrl.newburger.toppings">
+                    <!--avec getToppings() il récupére le nombre d'ingredient qu'on a et avec {{ topping }} il affiche ces ingredients-->
+                     <option ng-value="topping" 
+                            ng-repeat="topping in $ctrl.getToppings() track by $index">
+                        {{ topping }}
+                        </option>
+                     </select>
+    </div>
+
+    <div class="form-group">
+        <label for="burgercreator">Creator email</label>
+        <input type="email" name="creator" id="burgercreator" ng-model="$ctrl.newburger.creator" class="form-control">
+        <p ng-if="burgerForm.creator.$invalid" class="text-danger">email, morron</p>
+    </div>
+    <!--boutton save-->
+    <!--ecrire burgerForm.$invalid est la même chose que !burgerForm$valid-->
+    <button type="submit" class="btn btn-primary" ng-disabled="burgerForm.$invalid">save</button>
+</form>
