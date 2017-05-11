@@ -2,39 +2,52 @@ import { uniq, clone } from 'lodash'
 import uuid from 'uuid/v4'
 
 export class BurgersController {
-  constructor () {
-    this.burgers = [
-      {
-        id: 1,
-        name: 'maxi b',
-        toppings: ['steak', 'salad'],
-        creator: 'paul@ici.fr'
-      },
-      {
-        id: 2,
-        name: 'hot',
-        toppings: ['steak', 'tomate', 'spicy sauce'],
-        creator: 'paul@ici.fr'
-      },
-      {
-        id: 3,
-        name: 'vegan',
-        toppings: ['soja steak', 'salad', 'onions'],
-        creator: 'paul@ici.fr'
-      },
-      {
-        id: 4,
-        name: 'zombie',
-        toppings: ['steak', 'tomate'],
-        creator: 'paul@ici.fr'
-      }
-    ]
+  constructor (BurgerService) {
+    this.burgers = []
+
+    BurgerService.getBurgers()
+    .then(burgers => this.burgers = burgers)
+    .catch(err => console.error(err))
 
     this.col = 'name'
     this.desc = false
 
     this.newburger = this._initBurger()
   }
+
+    //   constructor () {
+    //     this.burgers = [
+    //       {
+    //         id: 1,
+    //         name: 'maxi b',
+    //         toppings: ['steak', 'salad'],
+    //         creator: 'paul@ici.fr'
+    //       },
+    //       {
+    //         id: 2,
+    //         name: 'hot',
+    //         toppings: ['steak', 'tomate', 'spicy sauce'],
+    //         creator: 'paul@ici.fr'
+    //       },
+    //       {
+    //         id: 3,
+    //         name: 'vegan',
+    //         toppings: ['soja steak', 'salad', 'onions'],
+    //         creator: 'paul@ici.fr'
+    //       },
+    //       {
+    //         id: 4,
+    //         name: 'zombie',
+    //         toppings: ['steak', 'tomate'],
+    //         creator: 'paul@ici.fr'
+    //       }
+    //     ]
+
+    //     this.col = 'name'
+    //     this.desc = false
+
+    //     this.newburger = this._initBurger()
+    //   }
 
   getToppings () {
     return uniq(this.burgers
@@ -81,7 +94,7 @@ export class BurgersController {
   }
 
   editBurger (burger) {
-    this.newburger = burger
+    this.newburger = clone(burger)
   }
 
   _initBurger () {
