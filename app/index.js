@@ -2,7 +2,7 @@ import angular from 'angular'
 import RouteModule from 'angular-route'
 import 'bootstrap/dist/css/bootstrap.css'
 
-import { GravatarComponent } from './gravatar/gravatar.component'
+import GravatarModule from './gravatar'
 import { BurgersController } from './burgers.controller'
 import { BurgerController } from './burger.controller'
 import { BurgerService } from './burger.service'
@@ -14,10 +14,9 @@ import { route } from './app.route'
 
 // Création du module app (application)
 angular.module('app', [
-    RouteModule // 'ngRoute'
+    RouteModule, // 'ngRoute'
+    GravatarModule
 ])
-
-.component('dtaGravatar', GravatarComponent)
 
 .controller('MyController', class MyController {
     constructor () {

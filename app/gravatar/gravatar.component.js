@@ -4,28 +4,35 @@ import './gravatar.component.css'
 import md5 from 'md5'
 
 class controller {
-    constructor ($timeout) {
+    constructor($timeout) {
         this.displayGravatar = true
     }
 
-//  ici on utilise un hook pour initialiser notre componnent
-    $onInit () {
+    //  ici on utilise un hook pour initialiser notre componnent
+    $onInit() {
         this.md5 = md5(this.email)
     }
 
-    toggleGravatar () {
+    toggleGravatar() {
         this.displayGravatar = !this.displayGravatar
     }
 
-  clicYo () {
-        this.onTalk({
-            $event: 'YO'
-        })
-    }
 
-    clicHi () {
+    //   clicYo () {
+    //         this.onTalk({
+    //             $event: 'YO'
+    //         })
+    //     }
+
+    //     clicHi () {
+    //         this.onTalk({
+    //             $event: 'HI'
+    //         })
+    //     }
+    talk() {
+        console.log(this.text)
         this.onTalk({
-            $event: 'HI'
+            $event: this.text
         })
     }
 }

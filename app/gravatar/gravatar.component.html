@@ -1,10 +1,9 @@
-<img 
-    ng-click="$ctrl.toggleGravatar()"
-    ng-if="$ctrl.displayGravatar" 
-    ng-src="https://www.gravatar.com/avatar/{{ $ctrl.md5 }}">
+<img ng-click="$ctrl.toggleGravatar()" ng-if="$ctrl.displayGravatar" ng-src="https://www.gravatar.com/avatar/{{ $ctrl.md5 }}">
 
-<div ng-if="!$ctrl.displayGravatar" >
+<div ng-if="!$ctrl.displayGravatar">
     <strong ng-click="$ctrl.toggleGravatar()">{{ $ctrl.email }}</strong>
-    <button class="btn" ng-click="$ctrl.clicYo()">yo!</button>
-    <button class="btn" ng-click="$ctrl.clicHi()">hi!</button>
+    <form>
+        <input type="text" ng-model="$ctrl.text" required ng-maxlength="5" class="form-control" placeholder="Yo!">
+        <button class="btn btn-block btn-primary" ng-click="$ctrl.talk(talkForm)">yo!</button>
+    </form>
 </div>
