@@ -6,34 +6,11 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Burger</title>
     <script src="/bundle.js"></script>
-    <style>
-        .container {
-            margin-top: 3em;
-        }
-        .sort.up::after {
-            content: ' ↑'
-        }
-        .sort.down::after {
-            content: ' ↓'
-        }
-    </style>
     <base href="/">
 </head>
 <body ng-app="app">
 
-    <div ng-controller="MyController as $ctrl">
-
-        <dta-gravatar 
-            email="$ctrl.thomas"
-            on-talk="$ctrl.talk($event)">
-        </dta-gravatar>
-
-    </div>
-
-    <!--<a href="/">BURGERS</a>
-    <a href="/game">PLAY</a>
-    
-    <div ng-view class="container"></div>    -->
+    <dta-game></dta-game>
 
 </body>
 </html>

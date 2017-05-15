@@ -1,0 +1,13 @@
+<img 
+    ng-click="$ctrl.toggleGravatar()"
+    ng-if="$ctrl.displayGravatar" 
+    ng-src="https://www.gravatar.com/avatar/{{ $ctrl.md5 }}">
+
+<div ng-if="!$ctrl.displayGravatar" >
+    <a ng-click="$ctrl.toggleGravatar()" class="close pull-right">&times;</a>
+    <strong>{{ $ctrl.email }}</strong>
+    <form name="talkForm">
+        <input type="text" ng-model="$ctrl.text" required maxlength="5" class="form-control" placeholder="Yo!">
+        <button class="btn btn-block btn-primary" ng-click="$ctrl.talk(talkForm)">yo!</button>
+    </form>
+</div>

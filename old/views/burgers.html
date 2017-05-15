@@ -1,0 +1,60 @@
+<div class="row">
+
+    <div class="col-sm-12">
+
+        <h3>Burgers list</h3>
+
+        <table class="table table-bordered table-striped">
+            <thead>
+                <tr>
+                    <th style="width: 50%">
+                        <a ng-click="$ctrl.sortBy('name')" 
+                            href 
+                            class="sort"
+                            ng-class="{ up: $ctrl.col === 'name' && !$ctrl.desc, down: $ctrl.col === 'name' && $ctrl.desc }">Name</a>
+                        <input ng-model="name" type="text" class="form-control input-sm">
+                    </th>
+                    <th>
+                        <a ng-click="$ctrl.sortBy('toppings')" 
+                        href 
+                        class="sort"
+                            ng-class="{ up: $ctrl.col === 'toppings' && !$ctrl.desc, down: $ctrl.col === 'toppings' && $ctrl.desc }">Toppings</a>
+                        <select ng-model="toppings" class="form-control input-sm">
+                            <option value=""></option>
+                            <option ng-value="topping" 
+                                ng-repeat="topping in $ctrl.getToppings() track by $index">
+                                {{ topping }}
+                            </option>
+                        </select>
+                    </th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="burger in $ctrl.burgers 
+                | filter:{name,toppings} 
+                | orderBy:$ctrl.applySort.bind($ctrl):$ctrl.desc
+                track by $index">
+                    <td>
+                        <a ng-href="/burger/{{ burger.id }}">{{ burger.name }}</a>
+                    </td>
+                    <td>
+                        {{ burger.toppings.length }} : {{ burger.toppings.join(',') }}
+                    </td>
+                    <td>
+                        <button ng-click="$ctrl.removeBurger(burger)" class="btn btn-sm">
+                            <span class="glyphicon glyphicon-trash"></span> 
+                        </button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+        <a href="/burger" class="btn btn-primary">
+            <span class="glyphicon glyphicon-plus"></span>
+            Add Burger
+        </a>
+
+    </div>
+
+</div>
