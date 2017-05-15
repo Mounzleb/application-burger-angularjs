@@ -117,3 +117,27 @@ package.json :
 ```
 
 Créer le fichier db.json à la racine.
+
+## Routing
+
+`npm i angular-route -S`
+
+```js
+// webpack.config.json
+devServer {
+    ...
+    historyApiFallback: true
+}
+```
+
+## Raw (html) loader
+
+`npm i raw-loader -D`
+
+```js
+{
+    test: /\.html$/,
+    exclude: [/node_modules/],
+    loader: 'raw-loader',
+},
+```

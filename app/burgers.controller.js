@@ -1,64 +1,23 @@
-import { uniq, clone } from 'lodash'
-import uuid from 'uuid/v4'
+import { uniq } from 'lodash'
 
 export class BurgersController {
   constructor (BurgerService) {
+    this.BurgerService = BurgerService
     this.burgers = []
-
-    BurgerService.getBurgers()
-    .then(burgers => this.burgers = burgers)
-    .catch(err => console.error(err))
-
     this.col = 'name'
     this.desc = false
 
-    this.newburger = this._initBurger()
+    this.fetchBurgers()
   }
 
-    //   constructor () {
-    //     this.burgers = [
-    //       {
-    //         id: 1,
-    //         name: 'maxi b',
-    //         toppings: ['steak', 'salad'],
-    //         creator: 'paul@ici.fr'
-    //       },
-    //       {
-    //         id: 2,
-    //         name: 'hot',
-    //         toppings: ['steak', 'tomate', 'spicy sauce'],
-    //         creator: 'paul@ici.fr'
-    //       },
-    //       {
-    //         id: 3,
-    //         name: 'vegan',
-    //         toppings: ['soja steak', 'salad', 'onions'],
-    //         creator: 'paul@ici.fr'
-    //       },
-    //       {
-    //         id: 4,
-    //         name: 'zombie',
-    //         toppings: ['steak', 'tomate'],
-    //         creator: 'paul@ici.fr'
-    //       }
-    //     ]
-
-    //     this.col = 'name'
-    //     this.desc = false
-
-    //     this.newburger = this._initBurger()
-    //   }
+  fetchBurgers() {
+    this.BurgerService.getBurgers()
+    .then(burgers => this.burgers = burgers)
+  }
 
   getToppings () {
     return uniq(this.burgers
     .reduce((acc, {toppings}) => [...acc, ...toppings], []))
-
-    /* <=>
-    .reduce((acc, burger) => {
-      let toppings = burger.toppings
-      return acc.concat(toppings)
-    }, [])
-    */
   }
 
   sortBy (col) {
@@ -72,37 +31,9 @@ export class BurgersController {
     if (this.col === 'toppings') return burger.toppings.length
   }
 
-  save (form) {
-    if (form.$invalid) return
-
-    if (!this.newburger.id) {
-      // creation burger
-      this.newburger.id = uuid()
-      this.burgers.push(clone(this.newburger))
-    } else {
-      // modification burger
-      let idx = this.burgers.findIndex(b => b.id === this.newburger.id)
-      if (idx !== -1) {
-        this.burgers[idx] = clone(this.newburger)
-      }
-    }
-
-    this.newburger = this._initBurger()
-
-    // reset form state
-    form.$setUntouched()
+  removeBurger (burger) {
+    this.BurgerService.remove(burger)
+    .then(() => this.fetchBurgers())
   }
 
-  editBurger (burger) {
-    this.newburger = clone(burger)
-  }
-
-  _initBurger () {
-    return {
-      id: null,
-      name: '',
-      toppings: [],
-      creator: ''
-    }
-  }
 }

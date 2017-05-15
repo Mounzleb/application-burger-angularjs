@@ -8,7 +8,7 @@
     "dev:server": "webpack-dev-server --open",
     "dev:copycast": "copycast",
     "dev:api": "json-server db.json -w",
-    "std": "standard \"app/*.js\""
+    "build": "webpack"
   },
   "keywords": [],
   "author": "",
@@ -21,6 +21,7 @@
     "file-loader": "^0.11.1",
     "json-server": "^0.10.0",
     "npm-run-all": "^4.0.2",
+    "raw-loader": "^0.5.1",
     "standard": "^10.0.2",
     "style-loader": "^0.17.0",
     "webpack": "^2.5.1",
@@ -28,8 +29,10 @@
   },
   "dependencies": {
     "angular": "^1.6.4",
+    "angular-route": "^1.6.4",
     "bootstrap": "^3.3.7",
     "lodash": "^4.17.4",
+    "md5": "^2.2.1",
     "uuid": "^3.0.1"
   }
 }

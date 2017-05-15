@@ -1,0 +1,10 @@
+<img 
+    ng-click="$ctrl.toggleGravatar()"
+    ng-if="$ctrl.displayGravatar" 
+    ng-src="https://www.gravatar.com/avatar/{{ $ctrl.md5 }}">
+
+<div ng-if="!$ctrl.displayGravatar" >
+    <strong ng-click="$ctrl.toggleGravatar()">{{ $ctrl.email }}</strong>
+    <button class="btn" ng-click="$ctrl.clicYo()">yo!</button>
+    <button class="btn" ng-click="$ctrl.clicHi()">hi!</button>
+</div>
