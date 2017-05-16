@@ -1,29 +1,40 @@
 import './game.component.css'
 import template from './game.component.html'
 
+//  code factorisé par rapport à la version précédente et on a l'ajout de la fonction restart
 class controller {
     constructor (ToppingService) {
         this.ToppingService = ToppingService
-        this.burger = []
     }
 
     $onInit () {
+        this.restart()
         this.ToppingService.getToppings()
         .then(toppings => this.toppings = toppings)
-
-        this.ToppingService.getRandomRecipe()
-        .then(recipe => this.recipe = recipe)
     }
 
     selectTopping (topping) {
         this.burger = [...this.burger, topping.name]
-        const check = this.ToppingService.checkRecipe(this.burger, this.recipe)
-        if (check === 'VALID') {
-            this.burger = []
-            this.recipe = []
-            this.ToppingService.getRandomRecipe()
-            .then(recipe => this.recipe = recipe)
+        switch (this.ToppingService.checkRecipe(this.burger, this.recipe)) {
+            case 'VALID' :
+                this.restart()
+                break
+            case 'INVALID' :
+                this.gameover()
+                break
         }
+    }
+
+    restart () {
+        this.burger = []
+        this.recipe = []
+        this.running = true
+        this.ToppingService.getRandomRecipe()
+        .then(recipe => this.recipe = recipe)
+    }
+
+    gameover () {
+        this.running = false
     }
 }
 

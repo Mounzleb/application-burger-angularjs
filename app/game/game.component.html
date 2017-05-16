@@ -1,6 +1,6 @@
 <div class="container">
 
-    <div class="row">
+    <div class="row" ng-if="$ctrl.running">
         
         <div class="col-sm-6">
             
@@ -9,7 +9,8 @@
                 on-select="$ctrl.selectTopping($event)"></dta-toppings>
 
             <dta-recipe
-                toppings="$ctrl.recipe"></dta-recipe>
+                toppings="$ctrl.recipe"
+                on-timeout="$ctrl.gameover()"></dta-recipe>
 
         </div>
 
@@ -20,6 +21,13 @@
 
         </div>
 
+    </div>
+
+    <div class="row" ng-if="!$ctrl.running">
+        <div class="col-sm-12">
+            <h2>Game Over</h2>
+            <button ng-click="$ctrl.restart()" class="btn btn-primary">Restart</button>
+        </div>
     </div>
 
 </div>

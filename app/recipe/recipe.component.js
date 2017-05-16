@@ -22,7 +22,7 @@ class controller {
                 console.log(this.cpt)
                 if (this.cpt === 0) {
                     this.$interval.cancel(this.interval)
-                    console.log('perdu')
+                    this.onTimeout()
                 }
             }, 1000)
         }
@@ -34,6 +34,7 @@ export let RecipeComponent = {
     controller,
     template,
     bindings: {
-        toppings: '<'
+        toppings: '<',
+        onTimeout: '&'
     }
 }

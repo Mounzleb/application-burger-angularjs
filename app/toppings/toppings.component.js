@@ -9,6 +9,7 @@ class controller {
     }
 
     select (topping) {
+        // déclenchement de l'evt onSelect
         this.onSelect({
             $event: topping
         })
