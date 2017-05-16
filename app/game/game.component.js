@@ -2,7 +2,7 @@ import './game.component.css'
 import template from './game.component.html'
 
 //  code factorisé par rapport à la version précédente et on a l'ajout de la fonction restart
-class controller {
+ class controller {
     constructor (ToppingService) {
         this.ToppingService = ToppingService
     }
@@ -33,7 +33,7 @@ class controller {
         .then(recipe => this.recipe = recipe)
     }
 
-    gameover () {
+ gameover () {
         this.running = false
     }
 }

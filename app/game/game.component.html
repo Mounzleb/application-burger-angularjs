@@ -7,7 +7,7 @@
             <dta-toppings 
                 toppings="$ctrl.toppings"
                 on-select="$ctrl.selectTopping($event)"></dta-toppings>
-            <!-- ici le on-timeout attrape notre evenement on-timeout-->
+            <!-- ici le on-timeout attrape notre evenement on-timeout et fait appel à la fonction gameOver()-->
             <dta-recipe
                 toppings="$ctrl.recipe"
                 on-timeout="$ctrl.gameover()"></dta-recipe>

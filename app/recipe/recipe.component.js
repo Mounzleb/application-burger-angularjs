@@ -13,12 +13,16 @@ class controller {
             this.toppings = angular.copy(this.toppings).reverse();
             // reset timer
             this.flag = !this.flag
-            this.time = 20 //{ value: 5 }
+            this.time = 3 //{ value: 5 }
         }
     }
 
+//  le onTimeout recupéré dans  game.component.html fait appelo à la fonciton gameOver et permettant
+// ainsi de faire afficher le game over et le boutoon restart
+
+//  end () est la fonction appelé quand le temps arrive à 0 et donc on appel dedans le onTimeour
     end () {
-        console.log('end')
+        this.onTimeout()
     }
 
     start (remain) {
@@ -27,6 +31,7 @@ class controller {
 
 }
 
+// ici nous avons l'evenement onTimeout qui est envoyé et recupérer dans game.component.html
 export let RecipeComponent = {
     controller,
     template,
