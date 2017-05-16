@@ -13,7 +13,7 @@ class controller {
             this.toppings = angular.copy(this.toppings).reverse();
             // reset timer
             this.flag = !this.flag
-            this.time = 3 //{ value: 5 }
+            this.time = 30 //{ value: 5 }
         }
     }
 

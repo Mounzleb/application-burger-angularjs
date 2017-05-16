@@ -1,33 +1,28 @@
 <div class="container">
 
-    <div class="row" ng-if="$ctrl.running">
-        
+    <div class="row">
+
         <div class="col-sm-6">
             <!-- ici le on-select attrape notre evenement on-select-->
             <dta-toppings 
                 toppings="$ctrl.toppings"
-                on-select="$ctrl.selectTopping($event)"></dta-toppings>
+                 on-select="$ctrl.selectTopping($event)">
+             </dta-toppings>
+
             <!-- ici le on-timeout attrape notre evenement on-timeout et fait appel à la fonction gameOver()-->
-            <dta-recipe
-                toppings="$ctrl.recipe"
-                on-timeout="$ctrl.gameover()"></dta-recipe>
+            <dta-recipe 
+                toppings="$ctrl.recipe" 
+                 on-timeout="$ctrl.gameover()"><
+                /dta-recipe>
 
         </div>
 
         <div class="col-sm-6">
-            
-            <dta-burger
-                toppings="$ctrl.burger"></dta-burger>
+
+            <dta-burger toppings="$ctrl.burger"></dta-burger>
 
         </div>
 
-    </div>
-
-    <div class="row" ng-if="!$ctrl.running">
-        <div class="col-sm-12">
-            <h2>Game Over</h2>
-            <button ng-click="$ctrl.restart()" class="btn btn-primary">Restart</button>
-        </div>
     </div>
 
 
